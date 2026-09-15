@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+.data
+scripts/.poster
+*.tsbuildinfo
+next-env.d.ts
+.env*.local
+.vercel
+.claude
+
+# Material original del cliente (≈50 MB): se optimiza a /public con `npm run assets`.
+/IMAGES Y LOGOS/

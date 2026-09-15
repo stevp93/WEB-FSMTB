@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    background-color: rgb(var(--s-canvas));
+  }
+
+  body {
+    @apply bg-canvas font-sans text-base text-ink antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgb(var(--s-focus));
+    outline-offset: 3px;
+  }
+
+  /* El foco programático al cambiar de ruta no debe dibujar un marco sobre toda la página. */
+  #main:focus {
+    outline: none;
+  }
+
+  a,
+  button,
+  select,
+  summary,
+  label,
+  input[type='checkbox'],
+  input[type='radio'] {
+    touch-action: manipulation;
+  }
+
+  a,
+  button,
+  select,
+  summary,
+  input[type='checkbox'],
+  input[type='radio'] {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background-color: rgb(var(--s-accent) / 0.35);
+    color: rgb(var(--s-ink));
+  }
+}
+
+@layer components {
+  /* Marco de lectura: único contenedor horizontal del sitio. */
+  .frame {
+    @apply mx-auto w-full max-w-frame px-4 md:px-8 lg:px-12;
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
