@@ -14,20 +14,11 @@ export function WhatsAppFloat() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    let frame = 0;
-    const onScroll = () => {
-      if (frame) return;
-      frame = requestAnimationFrame(() => {
-        frame = 0;
-        setVisible(window.scrollY > window.innerHeight * 0.6);
-      });
-    };
+    // Comparación barata en un listener pasivo; React descarta el setState si el valor no cambia.
+    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.6);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      cancelAnimationFrame(frame);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
