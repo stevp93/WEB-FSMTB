@@ -4,6 +4,7 @@ import { Backpack, CalendarDays, Handshake, MapPin, Route } from 'lucide-react';
 import { Countdown } from '@/components/home/Countdown';
 import { RouteLegend } from '@/components/site/RouteLegend';
 import { ScenePoster } from '@/components/site/ScenePoster';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { EVENT, KIT, ORGANIZERS, ROUTES, formatCOP } from '@/lib/event';
 import salida from '@/public/images/salida-edicion-anterior.webp';
@@ -53,7 +54,7 @@ const jsonLd = {
     '@type': 'Offer',
     price: String(EVENT.price),
     priceCurrency: EVENT.currency,
-    url: `${EVENT.contact.website}/inscripcion`,
+    url: EVENT.registrationUrl || EVENT.contact.website,
     availability: 'https://schema.org/InStock',
   },
   organizer: ORGANIZERS.map((org) => ({ '@type': 'Organization', name: org.name })),
@@ -92,9 +93,9 @@ export default function HomePage() {
                 </li>
               </ul>
               <div className="mt-8 flex flex-col gap-3 md:flex-row">
-                <Link href="/inscripcion" className={buttonClass('primary', 'lg')}>
+                <RegisterLink className={buttonClass('primary', 'lg')}>
                   Reservar mi cupo — {formatCOP(EVENT.price)}
-                </Link>
+                </RegisterLink>
                 <Link href="/recorridos" className={buttonClass('secondary', 'lg')}>
                   Ver recorridos
                 </Link>
@@ -178,9 +179,9 @@ export default function HomePage() {
               {formatCOP(EVENT.price)} COP con kit completo, seguro de accidentes y apoyo en ruta.
             </p>
           </div>
-          <Link href="/inscripcion" className={buttonClass('primary', 'lg', 'self-start lg:self-auto')}>
+          <RegisterLink className={buttonClass('primary', 'lg', 'self-start lg:self-auto')}>
             Reservar mi cupo
-          </Link>
+          </RegisterLink>
         </div>
       </section>
     </>

@@ -1,28 +1,20 @@
-import { EVENT, ROUTES, formatCOP, type RouteId } from './event';
+import { EVENT, ROUTES, type RouteId } from './event';
 
 export function whatsappLink(text: string) {
   return `https://wa.me/${EVENT.contact.whatsappNumber}?text=${encodeURIComponent(text)}`;
 }
 
-/**
- * Mensaje de cierre de inscripción. Solo lleva lo necesario para continuar la
- * conversación: el documento y el correo se quedan en el servidor, no en la URL.
- */
-export function registrationMessage(input: {
-  fullName: string;
-  category: RouteId;
-  jerseySize: string;
-  reference: string;
-}) {
-  const route = ROUTES[input.category];
-  return [
-    `Hola, acabo de reservar mi cupo en la ${EVENT.name} 2026.`,
-    `Nombre: ${input.fullName}`,
-    `Categoría: ${route.name} (${route.distanceKm} km)`,
-    `Talla de jersey: ${input.jerseySize}`,
-    `Referencia: ${input.reference}`,
-    `Quiero confirmar el pago de la inscripción (${formatCOP(EVENT.price)}).`,
-  ].join('\n');
+export function registrationIntentMessage(route?: RouteId) {
+  const base = `Hola, quiero inscribirme en la ${EVENT.name} 2026`;
+  if (!route) return `${base}. ¿Cómo reservo mi cupo?`;
+  const r = ROUTES[route];
+  return `${base} en la modalidad ${r.name} (${r.distanceKm} km). ¿Cómo reservo mi cupo?`;
+}
+
+/** Destino de las CTA de inscripción: la plataforma del tercero cuando exista; mientras tanto, WhatsApp. */
+export function registrationLink(route?: RouteId) {
+  if (EVENT.registrationUrl) return { href: EVENT.registrationUrl, viaWhatsApp: false };
+  return { href: whatsappLink(registrationIntentMessage(route)), viaWhatsApp: true };
 }
 
 export const GENERAL_MESSAGE = `Hola, quiero información sobre la ${EVENT.name} 2026.`;

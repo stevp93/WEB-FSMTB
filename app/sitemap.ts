@@ -6,6 +6,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return NAV.map(({ href }) => ({
     url: `${SITE_URL}${href === '/' ? '/' : `${href}/`}`,
     changeFrequency: 'weekly',
-    priority: href === '/' || href === '/inscripcion' ? 1 : 0.7,
+    priority: href === '/' ? 1 : 0.7,
   }));
 }

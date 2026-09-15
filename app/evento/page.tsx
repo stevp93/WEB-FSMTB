@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Droplets, Mountain, Users } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { EVENT } from '@/lib/event';
 import cascada from '@/public/images/cascada-san-francisco.webp';
@@ -120,9 +121,9 @@ export default function EventoPage() {
             <Link href="/recorridos" className={buttonClass('secondary', 'lg')}>
               Ver recorridos
             </Link>
-            <Link href="/inscripcion" className={buttonClass('primary', 'lg')}>
+            <RegisterLink className={buttonClass('primary', 'lg')}>
               Reservar mi cupo
-            </Link>
+            </RegisterLink>
           </div>
         </div>
       </section>

@@ -7,6 +7,7 @@ import { AnimatePresence, m } from 'framer-motion';
 import { MessageCircle, X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { getLenis } from '@/components/providers/SmoothScroll';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { EASE_IN, EASE_OUT } from '@/components/ui/motion';
@@ -126,9 +127,9 @@ export function MobileMenu({ open, pathname, onClose, onNavigate }: Props) {
           </nav>
 
           <div className="frame flex shrink-0 flex-col gap-3 pb-8 pt-8">
-            <Link href="/inscripcion" onClick={onNavigate} className={buttonClass('primary', 'lg', 'w-full')}>
+            <RegisterLink onClick={onNavigate} className={buttonClass('primary', 'lg', 'w-full')}>
               Reservar mi cupo — {formatCOP(EVENT.price)}
-            </Link>
+            </RegisterLink>
             <a
               href={whatsappLink(GENERAL_MESSAGE)}
               target="_blank"

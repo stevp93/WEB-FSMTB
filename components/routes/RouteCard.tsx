@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { Banknote, Gift } from 'lucide-react';
 import type { RibbonPoint } from '@/components/three/ProfileView';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { ROUTES, formatThousands, type RouteId } from '@/lib/event';
@@ -63,9 +63,9 @@ export function RouteCard({ id, profile, maxKm, rangeM }: Props) {
             </dd>
           </div>
         </dl>
-        <Link href={`/inscripcion?categoria=${id}`} className={buttonClass('primary', 'lg', 'mt-8 w-full')}>
+        <RegisterLink route={id} className={buttonClass('primary', 'lg', 'mt-8 w-full')}>
           {route.cta}
-        </Link>
+        </RegisterLink>
       </div>
     </article>
   );

@@ -31,11 +31,15 @@ Copia `.env.example` a `.env.local` y completa las variables.
 
 El sitio se exporta como estático (`output: 'export'`) y se publica con `.github/workflows/deploy.yml` en cada push a `main`. El workflow define `NEXT_PUBLIC_BASE_PATH` y `NEXT_PUBLIC_SITE_URL` según el repositorio. En **Settings → Pages → Source** debe estar seleccionado **GitHub Actions**.
 
-Variables opcionales en **Settings → Secrets and variables → Actions → Variables**: `LEAD_WEBHOOK_URL`, `DEVELOPER_URL`, `GA_ID`. Tras cambiarlas, relanza el workflow.
+Variables opcionales en **Settings → Secrets and variables → Actions → Variables**: `REGISTRATION_URL`, `GA_ID`. Tras cambiarlas, relanza el workflow.
 
-## Leads
+## Inscripción
 
-Al no haber servidor, `reserveSpot` (`lib/leads-client.ts`) valida en el navegador y hace POST del lead a `NEXT_PUBLIC_LEAD_WEBHOOK_URL` (JSON como `text/plain`, sin preflight CORS: sirve Google Apps Script, Make, Zapier o n8n). Sin webhook, la inscripción se completa por WhatsApp.
+La inscripción la gestiona un tercero. Todos los botones "Reservar mi cupo" usan `RegisterLink`: apuntan a `REGISTRATION_URL` cuando existe y, mientras tanto, abren WhatsApp (323 933 5820) con el mensaje y la modalidad ya escritos.
+
+## Marca del desarrollador
+
+El crédito de SP Automatizaciones (pie de página y Aliados) enlaza a Instagram. Para mostrar el logo, guárdalo en `public/logos/` y define `developer.logo` en `lib/event.ts`; mientras sea `null` se ve el espacio reservado.
 
 El mensaje de WhatsApp solo lleva nombre, categoría, talla y referencia: documento y correo no viajan en la URL.
 

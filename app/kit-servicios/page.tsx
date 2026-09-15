@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
 import { PageHeader } from '@/components/site/PageHeader';
 import { KitIcon } from '@/components/ui/KitIcon';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { EVENT, KIT, ROUTES, SERVICES, formatCOP } from '@/lib/event';
@@ -78,9 +78,9 @@ export default function KitServiciosPage() {
             <p className="mt-5 max-w-measure-sm text-lg text-ink-muted">
               La cascada y las huellas de la montaña, impresas en la prenda que te llevas. Eliges tu talla al inscribirte.
             </p>
-            <Link href="/inscripcion" className={buttonClass('primary', 'lg', 'mt-8')}>
+            <RegisterLink className={buttonClass('primary', 'lg', 'mt-8')}>
               Reservar mi cupo
-            </Link>
+            </RegisterLink>
           </div>
           <figure className="lg:col-span-6 lg:col-start-7">
             <Image

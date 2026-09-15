@@ -1,7 +1,8 @@
 import Image from 'next/image';
-import { withBase } from '@/lib/asset';
 import Link from 'next/link';
 import { Globe, MessageCircle } from 'lucide-react';
+import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
+import { withBase } from '@/lib/asset';
 import { EVENT, NAV, ORGANIZERS } from '@/lib/event';
 import { GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 
@@ -74,23 +75,18 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
-          <p>
-            Desarrollado por{' '}
-            {developer.url ? (
-              <a
-                href={developer.url}
-                target="_blank"
-                rel="noopener"
-                className="inline-flex min-h-11 items-center font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 transition-colors duration-150 hover:text-accent"
-              >
-                {developer.name}
-              </a>
-            ) : (
-              <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4">
-                {developer.name}
-              </span>
-            )}
-          </p>
+          <a
+            href={developer.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex min-h-11 items-center gap-3 self-start transition-colors duration-150 hover:text-ink lg:self-auto"
+          >
+            <span>Desarrollado por</span>
+            <DeveloperLogo />
+            <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 group-hover:text-accent">
+              {developer.name}
+            </span>
+          </a>
         </div>
       </div>
     </footer>

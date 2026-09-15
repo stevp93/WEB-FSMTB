@@ -9,6 +9,7 @@ import { Backdrop } from '@/components/site/Backdrop';
 import { RouteFocus } from '@/components/site/RouteFocus';
 import { SiteFooter } from '@/components/site/SiteFooter';
 import { SiteHeader } from '@/components/site/SiteHeader';
+import { WhatsAppFloat } from '@/components/site/WhatsAppFloat';
 import { SITE_URL } from '@/lib/asset';
 import { EVENT } from '@/lib/event';
 import { primitive } from '@/lib/tokens';
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             {children}
           </main>
           <SiteFooter />
+          <WhatsAppFloat />
           <RouteFocus />
           <SmoothScroll />
         </Providers>

@@ -54,7 +54,7 @@ const config: Config = {
         out: 'cubic-bezier(0.22, 1, 0.36, 1)',
         in: 'cubic-bezier(0.55, 0, 1, 0.45)',
       },
-      zIndex: { canvas: '0', content: '10', nav: '40', menu: '50', toast: '60' },
+      zIndex: { canvas: '0', content: '10', nav: '40', float: '45', menu: '50', toast: '60' },
     },
   },
   plugins: [

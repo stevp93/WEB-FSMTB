@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { withBase } from '@/lib/asset';
-import { Handshake, MessageCircle, Phone } from 'lucide-react';
+import { Handshake, Instagram, MessageCircle, Phone } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
-import { buttonClass } from '@/components/ui/button';
+import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
+import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { EVENT, ORGANIZERS } from '@/lib/event';
 import { ALLY_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 export default function AliadosPage() {
-  const { contact } = EVENT;
+  const { contact, developer } = EVENT;
 
   return (
     <>
@@ -117,6 +118,37 @@ export default function AliadosPage() {
             <Handshake className="size-5" aria-hidden />
             Hablar de alianzas
           </a>
+        </div>
+      </section>
+
+      <section aria-labelledby="desarrollo" className="border-t border-line/15">
+        <div className="frame grid gap-6 py-16 md:grid-cols-[12rem_1fr] md:items-center md:gap-10 md:py-20">
+          <a
+            href={developer.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${developer.name} en Instagram`}
+            className="flex h-28 w-44 items-center md:h-32 md:w-48"
+          >
+            <DeveloperLogo size="lg" />
+          </a>
+          <div>
+            <h2 id="desarrollo" className="font-display text-xl font-semibold text-ink md:text-2xl">
+              Desarrollo del sitio
+            </h2>
+            <p className="mt-2 max-w-measure text-ink-muted">
+              {developer.name} diseñó y desarrolló la web oficial de la SFMTB Trilogy Race.
+            </p>
+            <a
+              href={developer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${inlineLinkClass} mt-2 inline-flex min-h-11 items-center gap-2`}
+            >
+              <Instagram className="size-4" aria-hidden />
+              {developer.handle} en Instagram
+            </a>
+          </div>
         </div>
       </section>
 

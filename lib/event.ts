@@ -22,15 +22,19 @@ export const EVENT = {
   contact: {
     website: 'https://www.sfmtb.info',
     websiteLabel: 'www.sfmtb.info',
-    phoneLabel: '300 123 45 67',
-    phoneHref: 'tel:+573001234567',
-    whatsappNumber: '573001234567',
+    phoneLabel: '323 933 5820',
+    phoneHref: 'tel:+573239335820',
+    whatsappNumber: '573239335820',
   },
   developer: {
     name: 'SP Automatizaciones',
-    // Definir NEXT_PUBLIC_DEVELOPER_URL con el sitio oficial de SP Automatizaciones.
-    url: process.env.NEXT_PUBLIC_DEVELOPER_URL ?? '',
+    url: 'https://www.instagram.com/sp930718/',
+    handle: '@sp930718',
+    // Cuando llegue el logo: guardarlo en public/logos/ y definir { src, width, height }.
+    logo: null as { src: string; width: number; height: number } | null,
   },
+  // Plataforma de inscripción del tercero. Vacío: las CTA de inscripción abren WhatsApp con el mensaje listo.
+  registrationUrl: process.env.NEXT_PUBLIC_REGISTRATION_URL ?? '',
   // Cifras del documento de presentación del evento.
   community: {
     participantsPerEdition: 250,
@@ -144,7 +148,6 @@ export const NAV = [
   { href: '/evento', label: 'El Evento' },
   { href: '/recorridos', label: 'Recorridos' },
   { href: '/kit-servicios', label: 'Kit y servicios' },
-  { href: '/inscripcion', label: 'Inscripción' },
   { href: '/aliados', label: 'Aliados' },
 ] as const;
 

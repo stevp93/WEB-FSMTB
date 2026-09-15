@@ -57,16 +57,6 @@ export const SHOTS: Record<string, Shot> = {
     dim: 0.22,
     poster: { scale: 1.2, x: 7, y: 4 },
   },
-  '/inscripcion': {
-    position: [40, 26, 104],
-    target: [14, 6, 30],
-    fov: 30,
-    shiftY: 0.22,
-    fade: 0.45,
-    orbit: false,
-    dim: 0.18,
-    poster: { scale: 1.24, x: -4, y: 6 },
-  },
   '/aliados': {
     position: [86, 64, -46],
     target: [0, 6, 2],

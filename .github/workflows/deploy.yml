@@ -33,8 +33,7 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
           NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           # Variables del repositorio (Settings → Secrets and variables → Actions → Variables).
-          NEXT_PUBLIC_LEAD_WEBHOOK_URL: ${{ vars.LEAD_WEBHOOK_URL }}
-          NEXT_PUBLIC_DEVELOPER_URL: ${{ vars.DEVELOPER_URL }}
+          NEXT_PUBLIC_REGISTRATION_URL: ${{ vars.REGISTRATION_URL }}
           NEXT_PUBLIC_GA_ID: ${{ vars.GA_ID }}
 
       - uses: actions/upload-pages-artifact@v3

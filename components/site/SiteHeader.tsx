@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Menu } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useExperience } from '@/components/providers/Experience';
+import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { NAV } from '@/lib/event';
@@ -104,14 +105,12 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <Link
-          href="/inscripcion"
-          onMouseEnter={() => intent('/inscripcion')}
-          onFocus={() => intent('/inscripcion')}
+        <RegisterLink
+          icon={false}
           className={buttonClass('primary', 'md', 'ml-auto whitespace-nowrap px-4 text-sm md:px-5 md:text-base lg:ml-3')}
         >
           Reservar mi cupo
-        </Link>
+        </RegisterLink>
 
         <button
           ref={menuButton}
