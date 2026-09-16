@@ -24,12 +24,13 @@ export const EVENT = {
     items: 'Jersey Eleven, guantes Force y medias',
   },
   currency: 'COP',
+  // Reglamento oficial en PDF (public/docs).
+  rulesPdf: { src: '/docs/reglamento-sfmtb-2026.pdf', sizeLabel: '5,7 MB' },
   signature: 'SAN FRANCISCO MTB OFICIAL 2026',
   contact: {
     website: 'https://www.sfmtb.info',
     websiteLabel: 'www.sfmtb.info',
     phoneLabel: '323 933 5820',
-    phoneHref: 'tel:+573239335820',
     whatsappNumber: '573239335820',
     instagram: [
       { handle: '@julitoysusrutas', url: 'https://www.instagram.com/julitoysusrutas/' },
@@ -156,7 +157,7 @@ export const PRIZES = {
     { name: 'Máster C masculino', ages: '50 años o más' },
     { name: 'E-bikes', ages: 'Mixta, abierta' },
   ],
-  note: 'De no completarse el mínimo de inscritos, la premiación será en obsequios.',
+  note: 'De no completarse el mínimo de 30 inscritos por categoría, la premiación será en obsequios.',
 } as const;
 
 /** Marcas aliadas: se agregan aquí con su logo en public/logos/ a medida que se sumen. */

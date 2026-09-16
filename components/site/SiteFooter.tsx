@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Globe, Instagram, MessageCircle } from 'lucide-react';
+import { FileDown, Globe, Instagram, MessageCircle } from 'lucide-react';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { withBase } from '@/lib/asset';
 import { EVENT, NAV, ORGANIZERS } from '@/lib/event';
@@ -56,6 +56,16 @@ export function SiteFooter() {
               >
                 <Globe className="size-4 text-accent" aria-hidden />
                 {contact.websiteLabel}
+              </a>
+            </li>
+            <li>
+              <a
+                href={withBase(EVENT.rulesPdf.src)}
+                download
+                className="inline-flex min-h-11 items-center gap-2 text-ink-muted transition-colors duration-150 hover:text-ink"
+              >
+                <FileDown className="size-4 text-accent" aria-hidden />
+                Reglamento (PDF)
               </a>
             </li>
             {contact.instagram.map((account) => (

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Droplets, Mountain, Users } from 'lucide-react';
+import { Droplets, FileDown, Mountain, Users } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
+import { withBase } from '@/lib/asset';
 import { EVENT } from '@/lib/event';
 import cascada from '@/public/images/cascada-san-francisco.webp';
 import escuela from '@/public/images/escuela-ciclomontanismo.webp';
@@ -121,6 +122,10 @@ export default function EventoPage() {
             <Link href="/recorridos" className={buttonClass('secondary', 'lg')}>
               Ver recorridos
             </Link>
+            <a href={withBase(EVENT.rulesPdf.src)} download className={buttonClass('secondary', 'lg')}>
+              <FileDown className="size-5" aria-hidden />
+              Reglamento
+            </a>
             <RegisterLink className={buttonClass('primary', 'lg')}>
               Reservar mi cupo
             </RegisterLink>

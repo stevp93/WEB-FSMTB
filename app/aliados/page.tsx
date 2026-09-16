@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { withBase } from '@/lib/asset';
-import { Handshake, Instagram, MessageCircle, Phone } from 'lucide-react';
+import { Handshake, Instagram, MessageCircle } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
@@ -65,16 +65,12 @@ export default function AliadosPage() {
 
           <dl className="grid gap-10 md:grid-cols-2 lg:col-span-8">
             <div className="md:col-span-2">
-              <dt className="text-sm text-ink-muted">Teléfono y WhatsApp</dt>
+              <dt className="text-sm text-ink-muted">WhatsApp</dt>
               <dd className="tabular mt-2 font-display text-2xl font-semibold text-ink md:text-3xl">{contact.phoneLabel}</dd>
               <dd className="mt-5 flex flex-col gap-3 md:flex-row">
                 <a href={whatsappLink(GENERAL_MESSAGE)} target="_blank" rel="noopener noreferrer" className={buttonClass('primary', 'md')}>
                   <MessageCircle className="size-5" aria-hidden />
                   Escribir por WhatsApp
-                </a>
-                <a href={contact.phoneHref} className={buttonClass('secondary', 'md')}>
-                  <Phone className="size-5" aria-hidden />
-                  Llamar
                 </a>
               </dd>
             </div>

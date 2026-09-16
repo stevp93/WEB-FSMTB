@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { FileDown } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { KitIcon } from '@/components/ui/KitIcon';
 import { Prices } from '@/components/ui/Prices';
 import { RegisterLink } from '@/components/ui/RegisterLink';
-import { buttonClass } from '@/components/ui/button';
+import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
+import { withBase } from '@/lib/asset';
 import { EVENT, INCLUDES, PRIZES, ROUTES, formatCOP } from '@/lib/event';
 import indumentaria from '@/public/images/indumentaria-opcional.webp';
 
@@ -140,8 +142,12 @@ export default function KitServiciosPage() {
             </table>
           </div>
           <p className="mt-4 text-sm text-ink-muted">
-            {formatCOP(podiumTotal)} por categoría. {PRIZES.note}
+            {formatCOP(podiumTotal)} por categoría de la {ROUTES.carrera.name} ({ROUTES.carrera.distanceKm} km). {PRIZES.note}
           </p>
+          <a href={withBase(EVENT.rulesPdf.src)} download className={`${inlineLinkClass} mt-6 flex min-h-11 w-fit items-center gap-2`}>
+            <FileDown className="size-5" aria-hidden />
+            Descargar reglamento (PDF, {EVENT.rulesPdf.sizeLabel})
+          </a>
         </div>
       </section>
     </>
