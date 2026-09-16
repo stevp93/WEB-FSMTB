@@ -3,32 +3,19 @@ import { withBase } from '@/lib/asset';
 import { EVENT } from '@/lib/event';
 import { cx } from './cx';
 
-/** Espacio reservado para la marca de SP Automatizaciones: muestra el logo cuando se defina en lib/event.ts. */
-export function DeveloperLogo({ size = 'sm' }: { size?: 'sm' | 'lg' }) {
-  const { logo, name } = EVENT.developer;
-
-  if (logo) {
-    return (
-      <Image
-        src={withBase(logo.src)}
-        alt={`Logo de ${name}`}
-        width={logo.width}
-        height={logo.height}
-        sizes={size === 'lg' ? '192px' : '96px'}
-        className={cx('w-auto object-contain', size === 'lg' ? 'max-h-24' : 'h-8')}
-      />
-    );
-  }
+/** Marca de SP Automatizaciones: símbolo compacto en el pie, logo completo en Aliados. */
+/** decorative: el nombre ya aparece como texto junto al logo. */
+export function DeveloperLogo({ size = 'sm', decorative = false }: { size?: 'sm' | 'lg'; decorative?: boolean }) {
+  const { logo, mark, name } = EVENT.developer;
+  const asset = size === 'lg' ? logo : mark;
 
   return (
-    <span
-      aria-hidden
-      className={cx(
-        'grid shrink-0 place-items-center rounded-xs border border-dashed border-line/50 font-display font-semibold text-ink-muted',
-        size === 'lg' ? 'h-24 w-40 text-2xl' : 'h-8 w-12 text-xs',
-      )}
-    >
-      SP
-    </span>
+    <Image
+      src={withBase(asset.src)}
+      alt={decorative ? '' : `Logo de ${name}`}
+      width={asset.width}
+      height={asset.height}
+      className={cx('w-auto shrink-0 object-contain', size === 'lg' ? 'h-28 md:h-32' : 'h-8')}
+    />
   );
 }

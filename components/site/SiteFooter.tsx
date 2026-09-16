@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Globe, MessageCircle } from 'lucide-react';
+import { Globe, Instagram, MessageCircle } from 'lucide-react';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { withBase } from '@/lib/asset';
 import { EVENT, NAV, ORGANIZERS } from '@/lib/event';
-import { GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+import { DEVELOPER_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 
 export function SiteFooter() {
   const { developer, contact } = EVENT;
@@ -58,6 +58,19 @@ export function SiteFooter() {
                 {contact.websiteLabel}
               </a>
             </li>
+            {contact.instagram.map((account) => (
+              <li key={account.handle}>
+                <a
+                  href={account.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center gap-2 text-ink-muted transition-colors duration-150 hover:text-ink"
+                >
+                  <Instagram className="size-4 shrink-0 text-accent" aria-hidden />
+                  {account.handle}
+                </a>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -75,18 +88,30 @@ export function SiteFooter() {
               ))}
             </ul>
           </nav>
-          <a
-            href={developer.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex min-h-11 items-center gap-3 self-start transition-colors duration-150 hover:text-ink lg:self-auto"
-          >
-            <span>Desarrollado por</span>
-            <DeveloperLogo />
-            <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 group-hover:text-accent">
-              {developer.name}
-            </span>
-          </a>
+          <div className="flex flex-col gap-x-6 sm:flex-row sm:flex-wrap sm:items-center">
+            <a
+              href={developer.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex min-h-11 items-center gap-3 self-start transition-colors duration-150 hover:text-ink sm:self-auto"
+            >
+              <span>Desarrollado por</span>
+              <DeveloperLogo decorative />
+              <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 group-hover:text-accent">
+                {developer.name}
+              </span>
+            </a>
+            <a
+              href={whatsappLink(DEVELOPER_MESSAGE, developer.whatsappNumber)}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`WhatsApp de ${developer.name}: ${developer.phoneLabel}`}
+              className="inline-flex min-h-11 items-center gap-2 self-start transition-colors duration-150 hover:text-ink sm:self-auto"
+            >
+              <MessageCircle className="size-4 text-accent" aria-hidden />
+              <span className="tabular">{developer.phoneLabel}</span>
+            </a>
+          </div>
         </div>
       </div>
     </footer>

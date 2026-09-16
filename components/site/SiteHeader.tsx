@@ -10,13 +10,9 @@ import { useExperience } from '@/components/providers/Experience';
 import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
-import { NAV } from '@/lib/event';
+import { NAV, isActivePath } from '@/lib/event';
 import { preloadRouteChunks } from '@/lib/preload';
 import { MobileMenu } from './MobileMenu';
-
-export function isActivePath(pathname: string, href: string) {
-  return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`);
-}
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -106,7 +102,6 @@ export function SiteHeader() {
         </nav>
 
         <RegisterLink
-          icon={false}
           className={buttonClass('primary', 'md', 'ml-auto whitespace-nowrap px-4 text-sm md:px-5 md:text-base lg:ml-3')}
         >
           Reservar mi cupo

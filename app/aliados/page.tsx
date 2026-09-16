@@ -5,8 +5,11 @@ import { Handshake, Instagram, MessageCircle, Phone } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
-import { EVENT, ORGANIZERS } from '@/lib/event';
-import { ALLY_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+import { ALLIES, EVENT, ORGANIZERS } from '@/lib/event';
+import { ALLY_MESSAGE, DEVELOPER_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+
+// Casillas visibles aunque aún no haya marcas: invitan a sumarse y se ocupan a medida que llegan.
+const ALLY_SLOTS = 3;
 
 export const metadata: Metadata = {
   title: 'Aliados y contacto',
@@ -52,7 +55,7 @@ export default function AliadosPage() {
       <section aria-labelledby="contacto" className="border-t border-line/15 py-20 md:py-28">
         <div className="frame grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <h2 id="contacto" className="font-display text-xl font-semibold text-ink md:text-2xl">
+            <h2 id="contacto" className="scroll-mt-24 font-display text-xl font-semibold text-ink md:text-2xl">
               Contacto
             </h2>
             <p className="mt-4 max-w-measure-sm text-lg text-ink-muted">
@@ -87,6 +90,22 @@ export default function AliadosPage() {
               </dd>
             </div>
             <div>
+              <dt className="text-sm text-ink-muted">Instagram</dt>
+              {contact.instagram.map((account) => (
+                <dd key={account.handle}>
+                  <a
+                    href={account.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-11 items-center gap-2 text-lg text-ink transition-colors duration-150 hover:text-accent"
+                  >
+                    <Instagram className="size-5 shrink-0 text-accent" aria-hidden />
+                    {account.handle}
+                  </a>
+                </dd>
+              ))}
+            </div>
+            <div>
               <dt className="text-sm text-ink-muted">Lugar y fecha</dt>
               <dd className="mt-2 text-lg text-ink">
                 {EVENT.place}, {EVENT.country}
@@ -99,8 +118,8 @@ export default function AliadosPage() {
         </div>
       </section>
 
-      <section aria-labelledby="marcas" className="border-t border-line/15">
-        <div className="frame flex flex-col gap-6 py-16 md:py-20 lg:flex-row lg:items-center lg:justify-between">
+      <section aria-labelledby="marcas" className="border-t border-line/15 py-16 md:py-20">
+        <div className="frame flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
             <h2 id="marcas" className="font-display text-xl font-semibold text-ink md:text-2xl">
               ¿Tu marca quiere ser parte?
@@ -118,6 +137,40 @@ export default function AliadosPage() {
             <Handshake className="size-5" aria-hidden />
             Hablar de alianzas
           </a>
+        </div>
+
+        <div className="frame mt-10">
+          <h3 className="text-sm text-ink-muted">Marcas aliadas</h3>
+          <ul className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {ALLIES.map((ally) => {
+              const logo = (
+                <Image
+                  src={withBase(ally.logo.src)}
+                  alt={ally.name}
+                  width={ally.logo.width}
+                  height={ally.logo.height}
+                  sizes="192px"
+                  className="max-h-16 w-auto object-contain"
+                />
+              );
+              return (
+                <li key={ally.name} className="flex h-28 items-center justify-center rounded-xs border border-line/20 p-4">
+                  {ally.url ? (
+                    <a href={ally.url} target="_blank" rel="noopener noreferrer" className="flex h-full items-center">
+                      {logo}
+                    </a>
+                  ) : (
+                    logo
+                  )}
+                </li>
+              );
+            })}
+            {Array.from({ length: Math.max(0, ALLY_SLOTS - ALLIES.length) }, (_, i) => (
+              <li key={`libre-${i}`} className="flex h-28 items-center justify-center rounded-xs border border-dashed border-line/35 p-4 text-center text-sm text-ink-muted">
+                Espacio para tu marca
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -143,10 +196,19 @@ export default function AliadosPage() {
               href={developer.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`${inlineLinkClass} mt-2 inline-flex min-h-11 items-center gap-2`}
+              className={`${inlineLinkClass} mt-2 flex min-h-11 w-fit items-center gap-2`}
             >
               <Instagram className="size-4" aria-hidden />
               {developer.handle} en Instagram
+            </a>
+            <a
+              href={whatsappLink(DEVELOPER_MESSAGE, developer.whatsappNumber)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${inlineLinkClass} mt-1 flex min-h-11 w-fit items-center gap-2`}
+            >
+              <MessageCircle className="size-4" aria-hidden />
+              WhatsApp {developer.phoneLabel}
             </a>
           </div>
         </div>

@@ -102,12 +102,12 @@ export default function EventoPage() {
           <figure className="lg:order-first lg:col-span-5">
             <Image
               src={cascada}
-              alt="Cascada que cae sobre un pozo de agua clara entre rocas y bosque, en San Francisco, Cundinamarca."
+              alt="Agua del río Cañas corriendo entre rocas y bosque en San Francisco, Cundinamarca."
               sizes="(min-width: 1024px) 38vw, 100vw"
               placeholder="blur"
               className="mx-auto h-auto w-full max-w-md rounded-xs lg:max-w-none"
             />
-            <figcaption className="mt-3 text-sm text-ink-muted">Agua y bosque en San Francisco, Cundinamarca.</figcaption>
+            <figcaption className="mt-3 text-sm text-ink-muted">Río Cañas, San Francisco, Cundinamarca.</figcaption>
           </figure>
         </div>
       </section>

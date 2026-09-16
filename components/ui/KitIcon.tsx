@@ -2,18 +2,15 @@ import {
   Backpack,
   Banknote,
   Camera,
-  Footprints,
   Gift,
   GlassWater,
-  Hand,
-  HeartPulse,
   Medal,
   Package,
   Route,
   ShieldCheck,
-  Shirt,
   Siren,
   Ticket,
+  Tickets,
   Truck,
   UtensilsCrossed,
   Wrench,
@@ -22,10 +19,6 @@ import {
 import type { KitIcon as KitIconName } from '@/lib/event';
 
 const ICONS: Record<KitIconName, LucideIcon> = {
-  jersey: Shirt,
-  socks: Footprints,
-  gloves: Hand,
-  strap: HeartPulse,
   bib: Ticket,
   medal: Medal,
   sponsors: Package,
@@ -40,6 +33,7 @@ const ICONS: Record<KitIconName, LucideIcon> = {
   route: Route,
   cash: Banknote,
   gift: Gift,
+  raffle: Tickets,
 };
 
 export function KitIcon({ name, className }: { name: KitIconName; className?: string }) {

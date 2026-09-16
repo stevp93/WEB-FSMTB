@@ -4,9 +4,10 @@ import { Backpack, CalendarDays, Handshake, MapPin, Route } from 'lucide-react';
 import { Countdown } from '@/components/home/Countdown';
 import { RouteLegend } from '@/components/site/RouteLegend';
 import { ScenePoster } from '@/components/site/ScenePoster';
+import { Prices } from '@/components/ui/Prices';
 import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
-import { EVENT, KIT, ORGANIZERS, ROUTES, formatCOP } from '@/lib/event';
+import { EVENT, ORGANIZERS, ROUTES } from '@/lib/event';
 import salida from '@/public/images/salida-edicion-anterior.webp';
 
 const QUICK_LINKS = [
@@ -19,7 +20,7 @@ const QUICK_LINKS = [
   {
     href: '/kit-servicios',
     title: 'Kit y servicios',
-    text: `${KIT.length} piezas de kit, seguro de accidentes, avituallamiento y apoyo en ruta.`,
+    text: 'Qué incluye la inscripción, indumentaria opcional y premiación de cada categoría.',
     icon: Backpack,
   },
   {
@@ -93,13 +94,12 @@ export default function HomePage() {
                 </li>
               </ul>
               <div className="mt-8 flex flex-col gap-3 md:flex-row">
-                <RegisterLink className={buttonClass('primary', 'lg')}>
-                  Reservar mi cupo — {formatCOP(EVENT.price)}
-                </RegisterLink>
+                <RegisterLink className={buttonClass('primary', 'lg')}>Reservar mi cupo</RegisterLink>
                 <Link href="/recorridos" className={buttonClass('secondary', 'lg')}>
                   Ver recorridos
                 </Link>
               </div>
+              <Prices className="mt-6" />
             </div>
 
             <div className="flex flex-col gap-6 lg:col-span-5 lg:items-end lg:text-right">
@@ -176,8 +176,9 @@ export default function HomePage() {
               Tu cupo en la tercera edición
             </h2>
             <p className="mt-4 max-w-measure-sm text-lg text-ink-muted">
-              {formatCOP(EVENT.price)} COP con kit completo, seguro de accidentes y apoyo en ruta.
+              Kit del corredor, seguro de accidentes, apoyo en ruta y premiación. La indumentaria se adquiere por separado.
             </p>
+            <Prices className="mt-6" />
           </div>
           <RegisterLink className={buttonClass('primary', 'lg', 'self-start lg:self-auto')}>
             Reservar mi cupo

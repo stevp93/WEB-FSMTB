@@ -1,6 +1,6 @@
 # SFMTB Trilogy Race 2026
 
-Web oficial de inscripción de la tercera edición. Next.js 14 (App Router), React 18, TypeScript, Tailwind, three + R3F + drei, framer-motion, Lenis, react-hook-form + zod.
+Web oficial de la tercera edición. Next.js 14 (App Router), React 18, TypeScript, Tailwind, three + R3F + drei, framer-motion y Lenis.
 
 ## Comandos
 
@@ -19,12 +19,10 @@ Copia `.env.example` a `.env.local` y completa las variables.
 
 | Qué | Archivo |
 | --- | --- |
-| Datos maestros (fecha, precio, rutas, kit, aliados, contacto) | `lib/event.ts` |
+| Datos maestros (fecha, precios, rutas, kit, premiación, organizadores, marcas aliadas, contacto) | `lib/event.ts` |
 | Tokens de color (primitivo → semántico → componente) | `lib/tokens.ts` → `tailwind.config.ts` |
 | Encuadre 3D por página | `lib/shots.ts` |
 | Terreno y trazados (compartidos por 3D y perfiles) | `lib/terrain.ts`, `lib/profiles.ts` |
-| Validación del formulario | `lib/registration.ts` |
-| Server action y guardado del lead | `app/inscripcion/actions.ts`, `lib/leads.ts` |
 | Mensajes de WhatsApp | `lib/whatsapp.ts` |
 
 ## Despliegue (GitHub Pages)
@@ -35,13 +33,15 @@ Variables opcionales en **Settings → Secrets and variables → Actions → Var
 
 ## Inscripción
 
-La inscripción la gestiona un tercero. Todos los botones "Reservar mi cupo" usan `RegisterLink`: apuntan a `REGISTRATION_URL` cuando existe y, mientras tanto, abren WhatsApp (323 933 5820) con el mensaje y la modalidad ya escritos.
+Todos los botones "Reservar mi cupo" e "Inscribirme" usan `RegisterLink` y abren la plataforma de registro (https://sfmtb-view.onrender.com/, definida en `lib/event.ts`; la variable `REGISTRATION_URL` la reemplaza sin tocar código). El bot de WhatsApp (323 933 5820) queda solo en los accesos de contacto.
 
 ## Marca del desarrollador
 
-El crédito de SP Automatizaciones (pie de página y Aliados) enlaza a Instagram. Para mostrar el logo, guárdalo en `public/logos/` y define `developer.logo` en `lib/event.ts`; mientras sea `null` se ve el espacio reservado.
+El crédito de SP Automatizaciones (pie de página y Aliados) enlaza a Instagram y a su WhatsApp (304 523 5480). Logos en `public/logos/sp-automatizaciones.svg` (completo) y `sp-automatizaciones-simbolo.svg` (pie de página).
 
-El mensaje de WhatsApp solo lleva nombre, categoría, talla y referencia: documento y correo no viajan en la URL.
+## Marcas aliadas
+
+Se agregan en `ALLIES` (`lib/event.ts`) con su logo en `public/logos/`; mientras falten, Aliados muestra casillas "Espacio para tu marca".
 
 ## 3D y póster
 

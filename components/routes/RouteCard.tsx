@@ -63,7 +63,7 @@ export function RouteCard({ id, profile, maxKm, rangeM }: Props) {
             </dd>
           </div>
         </dl>
-        <RegisterLink route={id} className={buttonClass('primary', 'lg', 'mt-8 w-full')}>
+        <RegisterLink className={buttonClass('primary', 'lg', 'mt-8 w-full')}>
           {route.cta}
         </RegisterLink>
       </div>

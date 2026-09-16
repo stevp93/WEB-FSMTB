@@ -4,15 +4,15 @@ import Image from 'next/image';
 import { withBase } from '@/lib/asset';
 import Link from 'next/link';
 import { AnimatePresence, m } from 'framer-motion';
-import { MessageCircle, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { getLenis } from '@/components/providers/SmoothScroll';
+import { Prices } from '@/components/ui/Prices';
 import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { EASE_IN, EASE_OUT } from '@/components/ui/motion';
-import { EVENT, NAV, formatCOP } from '@/lib/event';
-import { GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+import { NAV, isActivePath } from '@/lib/event';
 
 type Props = {
   open: boolean;
@@ -105,7 +105,7 @@ export function MobileMenu({ open, pathname, onClose, onNavigate }: Props) {
           <nav aria-label="Principal" className="frame flex-1 pt-4">
             <m.ul variants={list} initial="hidden" animate="show" className="border-t border-line/15">
               {NAV.map((link) => {
-                const active = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
+                const active = isActivePath(pathname, link.href);
                 return (
                   <m.li key={link.href} variants={item} className="border-b border-line/15">
                     <Link
@@ -127,18 +127,10 @@ export function MobileMenu({ open, pathname, onClose, onNavigate }: Props) {
           </nav>
 
           <div className="frame flex shrink-0 flex-col gap-3 pb-8 pt-8">
-            <RegisterLink onClick={onNavigate} className={buttonClass('primary', 'lg', 'w-full')}>
-              Reservar mi cupo — {formatCOP(EVENT.price)}
+            <Prices />
+            <RegisterLink onClick={onNavigate} className={buttonClass('primary', 'lg', 'mt-3 w-full')}>
+              Reservar mi cupo
             </RegisterLink>
-            <a
-              href={whatsappLink(GENERAL_MESSAGE)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={buttonClass('secondary', 'lg', 'w-full')}
-            >
-              <MessageCircle className="size-5" aria-hidden />
-              WhatsApp {EVENT.contact.phoneLabel}
-            </a>
           </div>
         </m.div>
       ) : null}
