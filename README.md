@@ -27,7 +27,7 @@ Copia `.env.example` a `.env.local` y completa las variables.
 
 ## Despliegue (GitHub Pages)
 
-El sitio se exporta como estático (`output: 'export'`) y se publica con `.github/workflows/deploy.yml` en cada push a `main`. El workflow define `NEXT_PUBLIC_BASE_PATH` y `NEXT_PUBLIC_SITE_URL` según el repositorio. En **Settings → Pages → Source** debe estar seleccionado **GitHub Actions**.
+El sitio se exporta como estático (`output: 'export'`) y se publica con `.github/workflows/deploy.yml` en cada push a `main`. Se sirve en el dominio propio https://www.sfmtb.info (`public/CNAME`), por eso el workflow compila sin `NEXT_PUBLIC_BASE_PATH`. En **Settings → Pages → Source** debe estar seleccionado **GitHub Actions**.
 
 Variables opcionales en **Settings → Secrets and variables → Actions → Variables**: `REGISTRATION_URL`, `GA_ID`. Tras cambiarlas, relanza el workflow.
 

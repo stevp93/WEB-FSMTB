@@ -30,8 +30,9 @@ jobs:
       - name: Build estático
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
-          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          # Dominio propio (public/CNAME): el sitio se sirve en la raíz, sin subruta del repositorio.
+          NEXT_PUBLIC_BASE_PATH: ''
+          NEXT_PUBLIC_SITE_URL: https://www.sfmtb.info
           # Variables del repositorio (Settings → Secrets and variables → Actions → Variables).
           NEXT_PUBLIC_REGISTRATION_URL: ${{ vars.REGISTRATION_URL }}
           NEXT_PUBLIC_GA_ID: ${{ vars.GA_ID }}
