@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Archivo, Hanken_Grotesk } from 'next/font/google';
 import localFont from 'next/font/local';
 import type { ReactNode } from 'react';
-import { DeferredAnalytics } from '@/components/DeferredAnalytics';
+import { Analytics } from '@/components/analytics/Analytics';
 import { Providers } from '@/components/providers/Providers';
 import { SmoothScroll } from '@/components/providers/SmoothScroll';
 import { Backdrop } from '@/components/site/Backdrop';
@@ -78,7 +78,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <RouteFocus />
           <SmoothScroll />
         </Providers>
-        <DeferredAnalytics />
+        <Analytics />
       </body>
     </html>
   );

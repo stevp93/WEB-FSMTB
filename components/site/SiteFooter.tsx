@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { FileDown, Globe, Instagram, MessageCircle } from 'lucide-react';
+import { ConsentSettingsButton } from '@/components/analytics/ConsentSettingsButton';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { withBase } from '@/lib/asset';
 import { EVENT, NAV, ORGANIZERS } from '@/lib/event';
@@ -96,6 +97,9 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <ConsentSettingsButton className="inline-flex min-h-11 items-center transition-colors duration-150 hover:text-ink" />
+              </li>
             </ul>
           </nav>
           <div className="flex flex-col gap-x-6 sm:flex-row sm:flex-wrap sm:items-center">

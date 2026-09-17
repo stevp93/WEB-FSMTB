@@ -35,7 +35,6 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://www.sfmtb.info
           # Variables del repositorio (Settings → Secrets and variables → Actions → Variables).
           NEXT_PUBLIC_REGISTRATION_URL: ${{ vars.REGISTRATION_URL }}
-          NEXT_PUBLIC_GA_ID: ${{ vars.GA_ID }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
