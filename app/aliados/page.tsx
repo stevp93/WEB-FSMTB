@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import { withBase } from '@/lib/asset';
-import { Handshake, Instagram, MessageCircle } from 'lucide-react';
+import { Globe, Handshake, Instagram, MessageCircle } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { ALLIES, EVENT, ORGANIZERS } from '@/lib/event';
-import { ALLY_MESSAGE, DEVELOPER_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+import { ALLY_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 
 // Casillas visibles aunque aún no haya marcas: invitan a sumarse y se ocupan a medida que llegan.
 const ALLY_SLOTS = 3;
@@ -176,7 +176,7 @@ export default function AliadosPage() {
             href={developer.url}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`${developer.name} en Instagram`}
+            aria-label={`Sitio web de ${developer.name}`}
             className="flex h-28 w-44 items-center md:h-32 md:w-48"
           >
             <DeveloperLogo size="lg" />
@@ -194,17 +194,17 @@ export default function AliadosPage() {
               rel="noopener noreferrer"
               className={`${inlineLinkClass} mt-2 flex min-h-11 w-fit items-center gap-2`}
             >
-              <Instagram className="size-4" aria-hidden />
-              {developer.handle} en Instagram
+              <Globe className="size-4" aria-hidden />
+              {developer.urlLabel}
             </a>
             <a
-              href={whatsappLink(DEVELOPER_MESSAGE, developer.whatsappNumber)}
+              href={developer.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className={`${inlineLinkClass} mt-1 flex min-h-11 w-fit items-center gap-2`}
             >
-              <MessageCircle className="size-4" aria-hidden />
-              WhatsApp {developer.phoneLabel}
+              <Instagram className="size-4" aria-hidden />
+              {developer.handle} en Instagram
             </a>
           </div>
         </div>

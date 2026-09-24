@@ -1,9 +1,11 @@
 'use client';
 
 import { Cookie } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { getLenis } from '@/components/providers/SmoothScroll';
 import { buttonClass } from '@/components/ui/button';
 import {
+  CONSENT_GRANTED_EVENT,
   OPEN_CONSENT_EVENT,
   loadClarity,
   readConsent,
@@ -12,52 +14,90 @@ import {
   type ConsentChoice,
 } from '@/lib/analytics';
 
-/** Aviso breve de cookies de medición: no bloquea la navegación y se reabre desde el pie de página. */
+type Step = 'closed' | 'ask' | 'blocked';
+
+/**
+ * Aviso de cookies obligatorio: la web solo se navega tras aceptar. Mientras está abierto, el resto
+ * del documento queda inerte (sin foco, clic ni scroll). Se reabre desde "Preferencias de cookies".
+ */
 export function ConsentBanner() {
-  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>('closed');
+  const dialog = useRef<HTMLDivElement>(null);
+  const accept = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const stored = readConsent();
-    if (stored === 'granted') loadClarity();
-    if (!stored) setOpen(true);
+    if (readConsent() === 'granted') loadClarity();
+    else setStep('ask');
 
-    const reopen = () => setOpen(true);
+    const reopen = () => setStep('ask');
     window.addEventListener(OPEN_CONSENT_EVENT, reopen);
     return () => window.removeEventListener(OPEN_CONSENT_EVENT, reopen);
   }, []);
 
+  useEffect(() => {
+    if (step === 'closed') return;
+    const root = dialog.current?.parentElement;
+    const others = Array.from(document.body.children).filter((el) => el !== root && !el.contains(root ?? null));
+    others.forEach((el) => el.setAttribute('inert', ''));
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const lenis = getLenis();
+    lenis?.stop();
+    accept.current?.focus();
+
+    return () => {
+      others.forEach((el) => el.removeAttribute('inert'));
+      document.body.style.overflow = previousOverflow;
+      lenis?.start();
+    };
+  }, [step]);
+
   const choose = (choice: ConsentChoice) => {
     storeConsent(choice);
     updateGoogleConsent(choice);
-    if (choice === 'granted') loadClarity();
-    // Si Clarity ya corría en esta visita, retira el consentimiento y borra sus cookies.
-    else window.clarity?.('consent', false);
-    setOpen(false);
+    if (choice === 'granted') {
+      loadClarity();
+      setStep('closed');
+      window.dispatchEvent(new Event(CONSENT_GRANTED_EVENT));
+    } else {
+      // Si Clarity ya corría en esta visita, retira el consentimiento y borra sus cookies.
+      window.clarity?.('consent', false);
+      setStep('blocked');
+    }
   };
 
-  if (!open) return null;
+  if (step === 'closed') return null;
 
   return (
-    <section
-      aria-labelledby="cookies-titulo"
-      className="fixed inset-x-4 bottom-4 z-toast rounded-sm bg-surface p-5 text-ink shadow-lift-3 ring-1 ring-line/30 md:bottom-6 md:left-6 md:right-auto md:max-w-sm"
-    >
-      <h2 id="cookies-titulo" className="flex items-center gap-2 font-semibold">
-        <Cookie className="size-5 text-accent" aria-hidden />
-        Cookies de medición
-      </h2>
-      <p className="mt-2 text-sm text-ink-muted">
-        Usamos Google Analytics y Microsoft Clarity para entender cómo se usa la web y mejorarla. Solo se activan si
-        aceptas.
-      </p>
-      <div className="mt-4 flex gap-3">
-        <button type="button" onClick={() => choose('granted')} className={buttonClass('primary', 'md', 'flex-1')}>
-          Aceptar
-        </button>
-        <button type="button" onClick={() => choose('denied')} className={buttonClass('secondary', 'md', 'flex-1')}>
-          Rechazar
-        </button>
+    <div className="fixed inset-0 z-toast grid place-items-center bg-canvas/85 p-4">
+      <div
+        ref={dialog}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cookies-titulo"
+        aria-describedby="cookies-texto"
+        className="w-full max-w-sm rounded-sm bg-surface p-6 text-ink shadow-lift-3 ring-1 ring-line/30"
+      >
+        <h2 id="cookies-titulo" className="flex items-center gap-2 font-display text-lg font-semibold">
+          <Cookie className="size-5 text-accent" aria-hidden />
+          Cookies
+        </h2>
+        <p id="cookies-texto" className="mt-2 text-ink-muted">
+          {step === 'ask'
+            ? '¿Aceptas el uso de cookies en este sitio?'
+            : 'Para navegar en el sitio debes aceptar las cookies.'}
+        </p>
+        <div className="mt-5 flex gap-3">
+          <button ref={accept} type="button" onClick={() => choose('granted')} className={buttonClass('primary', 'md', 'flex-1')}>
+            Aceptar
+          </button>
+          {step === 'ask' ? (
+            <button type="button" onClick={() => choose('denied')} className={buttonClass('secondary', 'md', 'flex-1')}>
+              No acepto
+            </button>
+          ) : null}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }

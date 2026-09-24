@@ -7,6 +7,8 @@ export type ConsentChoice = 'granted' | 'denied';
 export const CONSENT_KEY = 'sfmtb-consent';
 /** Evento para reabrir el aviso desde el pie de página. */
 export const OPEN_CONSENT_EVENT = 'sfmtb:open-consent';
+/** Se emite al aceptar: en celular es la señal para arrancar el 3D. */
+export const CONSENT_GRANTED_EVENT = 'sfmtb:consent-granted';
 
 type Tag = ((...args: unknown[]) => void) & { q?: unknown[] };
 

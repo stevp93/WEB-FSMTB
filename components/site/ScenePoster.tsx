@@ -62,7 +62,7 @@ export function ScenePoster({ hero = false }: { hero?: boolean }) {
         'pointer-events-none absolute inset-0 -z-10 overflow-hidden',
         // En móvil el hero es más alto que la pantalla: el póster se queda en el primer pantallazo y sube la cordillera sobre el texto.
         hero && 'max-md:bottom-auto max-md:h-[100svh]',
-        mode === '3d' && 'hidden',
+        'transition-[opacity,visibility] duration-700 ease-out [html[data-scene=ready]_&]:invisible [html[data-scene=ready]_&]:opacity-0',
       )}
     >
       <picture className={cx('block h-full w-full', hero && 'max-md:-translate-y-[9%]')}>

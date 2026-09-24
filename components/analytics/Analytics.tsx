@@ -4,7 +4,7 @@ import { ConsentBanner } from './ConsentBanner';
 
 /**
  * GTM con Consent Mode v2: el estado por defecto (denegado, o la elección guardada) se fija antes de pedir el
- * contenedor, así GA4 no escribe cookies sin permiso. Se carga después de hidratar para no competir con el LCP.
+ * contenedor, así GA4 no escribe cookies sin permiso. Se carga cuando la página terminó de cargar.
  */
 const bootstrap = `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;
 var c=null;try{c=localStorage.getItem('${CONSENT_KEY}')}catch(e){}
@@ -14,7 +14,7 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
 export function Analytics() {
   return (
     <>
-      <Script id="gtm" strategy="afterInteractive">
+      <Script id="gtm" strategy="lazyOnload">
         {bootstrap}
       </Script>
       <ConsentBanner />

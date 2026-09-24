@@ -5,7 +5,7 @@ import { ConsentSettingsButton } from '@/components/analytics/ConsentSettingsBut
 import { DeveloperLogo } from '@/components/ui/DeveloperLogo';
 import { withBase } from '@/lib/asset';
 import { EVENT, NAV, ORGANIZERS } from '@/lib/event';
-import { DEVELOPER_MESSAGE, GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
+import { GENERAL_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 
 export function SiteFooter() {
   const { developer, contact } = EVENT;
@@ -102,30 +102,18 @@ export function SiteFooter() {
               </li>
             </ul>
           </nav>
-          <div className="flex flex-col gap-x-6 sm:flex-row sm:flex-wrap sm:items-center">
-            <a
-              href={developer.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex min-h-11 items-center gap-3 self-start transition-colors duration-150 hover:text-ink sm:self-auto"
-            >
-              <span>Desarrollado por</span>
-              <DeveloperLogo decorative />
-              <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 group-hover:text-accent">
-                {developer.name}
-              </span>
-            </a>
-            <a
-              href={whatsappLink(DEVELOPER_MESSAGE, developer.whatsappNumber)}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`WhatsApp de ${developer.name}: ${developer.phoneLabel}`}
-              className="inline-flex min-h-11 items-center gap-2 self-start transition-colors duration-150 hover:text-ink sm:self-auto"
-            >
-              <MessageCircle className="size-4 text-accent" aria-hidden />
-              <span className="tabular">{developer.phoneLabel}</span>
-            </a>
-          </div>
+          <a
+            href={developer.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex min-h-11 items-center gap-3 self-start transition-colors duration-150 hover:text-ink lg:self-auto"
+          >
+            <span>Desarrollado por</span>
+            <DeveloperLogo decorative />
+            <span className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4 group-hover:text-accent">
+              {developer.name}
+            </span>
+          </a>
         </div>
       </div>
     </footer>

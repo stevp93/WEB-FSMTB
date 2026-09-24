@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useExperience } from '@/components/providers/Experience';
 import { cx } from '@/components/ui/cx';
 
@@ -15,6 +15,13 @@ export function Backdrop() {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
   const onReady = useCallback(() => setReady(true), []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (mode === '3d' && ready) root.dataset.scene = 'ready';
+    else delete root.dataset.scene;
+    if (mode !== '3d') setReady(false);
+  }, [mode, ready]);
 
   if (mode !== '3d') return null;
 

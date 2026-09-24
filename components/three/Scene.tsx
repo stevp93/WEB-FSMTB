@@ -2,9 +2,10 @@
 
 import { View } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Color } from 'three';
 import { subscribeFrame } from '@/components/providers/SmoothScroll';
+import { isMobileDevice } from '@/lib/experience';
 import { requestSceneFrame, sceneBus } from '@/lib/scene-bus';
 import { shotFor } from '@/lib/shots';
 import { primitive } from '@/lib/tokens';
@@ -22,11 +23,12 @@ type SceneProps = {
 };
 
 export default function Scene({ pathname, onReady, capture = false }: SceneProps) {
+  const [maxDpr] = useState(() => (isMobileDevice() ? 1.5 : 2));
   return (
     <Canvas
       frameloop="never"
       flat
-      dpr={[1, 2]}
+      dpr={[1, maxDpr]}
       resize={{ scroll: false }}
       gl={{ antialias: true, alpha: false, powerPreference: 'high-performance', preserveDrawingBuffer: capture }}
       camera={{ fov: 34, near: 1, far: 800, position: [0, 46, 112] }}
@@ -155,13 +157,16 @@ function WindowRenderer({ pathname, windowUniforms }: { pathname: string; window
 
     const rect = windowEl.current?.getBoundingClientRect();
     if (!rect) return;
+    // En celular el hero es más alto que la pantalla: la escena ocupa solo su primer pantallazo, como el póster.
+    const winHeight = Math.min(rect.height, size.height);
+    const winBottom = rect.top + winHeight;
     const top = Math.max(0, rect.top);
-    const bottom = Math.min(size.height, rect.bottom);
+    const bottom = Math.min(size.height, winBottom);
     if (bottom <= top) return;
 
     const dpr = gl.getPixelRatio();
-    windowUniforms.uWinBottom.value = (size.height - rect.bottom) * dpr;
-    windowUniforms.uWinHeight.value = rect.height * dpr;
+    windowUniforms.uWinBottom.value = (size.height - winBottom) * dpr;
+    windowUniforms.uWinHeight.value = winHeight * dpr;
 
     gl.setViewport(0, 0, size.width, size.height);
     gl.setScissor(0, size.height - bottom, size.width, bottom - top);
