@@ -1,4 +1,5 @@
-/** Identificadores de medición: Google Tag Manager (GA4 se configura dentro del contenedor) y Microsoft Clarity. */
+/** Identificadores de medición: GA4 (etiqueta de Google directa), Google Tag Manager y Microsoft Clarity. */
+export const GA_ID = 'G-XQR1G5ZJ1M';
 export const GTM_ID = 'GTM-WSXJH8DD';
 export const CLARITY_ID = 'yjgwvut3dg';
 
