@@ -171,7 +171,7 @@ export const ALLIES: {
     name: 'SP Automatizaciones',
     handle: '@sp930718',
     url: 'https://www.instagram.com/sp930718/',
-    logo: { src: '/logos/sp-automatizaciones.svg', width: 213, height: 152 },
+    logo: { src: '/logos/sp-automatizaciones-simbolo.svg', width: 106, height: 70 },
   },
   {
     name: 'TesaRoll',
