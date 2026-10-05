@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { FileDown } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { KitIcon } from '@/components/ui/KitIcon';
@@ -7,6 +8,7 @@ import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { withBase } from '@/lib/asset';
+import indumentaria from '@/public/images/indumentaria-jersey-medias.webp';
 import { EVENT, INCLUDES, PRIZES, ROUTES, formatCOP } from '@/lib/event';
 
 const PODIUM_LABELS = ['Primero', 'Segundo', 'Tercero'];
@@ -75,22 +77,31 @@ export default function KitServiciosPage() {
             </p>
             <RegisterLink className={buttonClass('primary', 'lg', 'mt-8')}>Reservar mi cupo</RegisterLink>
           </div>
-          <figure className="lg:col-span-6 lg:col-start-7">
-            <video
-              src={withBase('/video/jersey-sfmtb.mp4')}
-              poster={withBase('/video/jersey-sfmtb-poster.webp')}
-              width={720}
-              height={1280}
-              autoPlay
-              muted
-              loop
-              playsInline
-              controls
-              preload="metadata"
-              aria-label="Video del jersey Eleven de la SFMTB Trilogy Race: color arena con cascada y huellas de llanta, en vista frontal y dorsal."
-              className="mx-auto h-auto w-full max-w-sm rounded-xs"
-            />
-            <figcaption className="mx-auto mt-3 max-w-sm text-sm text-ink-muted">{apparel.items}.</figcaption>
+          <figure className="lg:col-span-7 lg:col-start-6">
+            <div className="mx-auto grid max-w-sm gap-4 md:max-w-none md:grid-cols-[3fr_4fr]">
+              <video
+                src={withBase('/video/jersey-sfmtb.mp4')}
+                poster={withBase('/video/jersey-sfmtb-poster.webp')}
+                width={720}
+                height={1280}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
+                preload="metadata"
+                aria-label="Video del jersey Eleven de la SFMTB Trilogy Race: color arena con cascada y huellas de llanta, en vista frontal y dorsal."
+                className="h-auto w-full rounded-xs"
+              />
+              <Image
+                src={indumentaria}
+                alt="Jersey Eleven color arena con cascada y huellas de llanta en vista frontal, dorsal y lateral, junto a las medias blancas SFMTB."
+                sizes="(min-width: 1024px) 380px, (min-width: 768px) 55vw, 384px"
+                placeholder="blur"
+                className="h-auto w-full rounded-xs"
+              />
+            </div>
+            <figcaption className="mx-auto mt-3 max-w-sm text-sm text-ink-muted md:max-w-none">{apparel.items}.</figcaption>
           </figure>
         </div>
       </section>

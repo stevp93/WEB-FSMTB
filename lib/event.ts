@@ -168,6 +168,12 @@ export const ALLIES: {
   logo: { src: string; width: number; height: number };
 }[] = [
   {
+    name: 'SP Automatizaciones',
+    handle: '@sp930718',
+    url: 'https://www.instagram.com/sp930718/',
+    logo: { src: '/logos/sp-automatizaciones.svg', width: 213, height: 152 },
+  },
+  {
     name: 'TesaRoll',
     handle: '@tesarolls',
     url: 'https://www.instagram.com/tesarolls/',
