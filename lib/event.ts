@@ -207,7 +207,7 @@ export const ALLIES: {
     name: 'Tibet Epic',
     handle: '@tibetepic',
     url: 'https://www.instagram.com/tibetepic/',
-    logo: { src: '/logos/aliados/tibet-epic.png', width: 373, height: 240 },
+    logo: { src: '/logos/aliados/tibet-epic.png', width: 394, height: 240 },
   },
   {
     name: 'Eleven',

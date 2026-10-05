@@ -66,7 +66,7 @@ const allies = [
   { src: 'Aliados/NoPinches.png', out: 'logos/aliados/no-pinches.png' },
   { src: 'Aliados/CapoPh.png', out: 'logos/aliados/elcapo-ph.png' },
   { src: 'Aliados/Inbike.jpeg', out: 'logos/aliados/inbicible.png', knockout: true },
-  { src: 'Aliados/TibetEpic.jpeg', out: 'logos/aliados/tibet-epic.png', plate: true },
+  { src: 'Aliados/TibetEpic.png', out: 'logos/aliados/tibet-epic.png' },
   { src: 'Aliados/Eleven.png', out: 'logos/aliados/eleven.png' },
   { src: 'Aliados/Colducoq.png', out: 'logos/aliados/col-du-coq.png' },
 ];
