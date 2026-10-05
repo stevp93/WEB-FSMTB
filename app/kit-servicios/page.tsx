@@ -8,7 +8,7 @@ import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { withBase } from '@/lib/asset';
-import indumentaria from '@/public/images/indumentaria-jersey-medias.webp';
+import indumentaria from '@/public/images/indumentaria-opcional.webp';
 import { EVENT, INCLUDES, PRIZES, ROUTES, formatCOP } from '@/lib/event';
 
 const PODIUM_LABELS = ['Primero', 'Segundo', 'Tercero'];
@@ -95,7 +95,7 @@ export default function KitServiciosPage() {
               />
               <Image
                 src={indumentaria}
-                alt="Jersey Eleven color arena con cascada y huellas de llanta en vista frontal, dorsal y lateral, junto a las medias blancas SFMTB."
+                alt={`Indumentaria opcional por ${formatCOP(apparel.price)}: jersey Eleven color arena con cascada y huellas de llanta en vista frontal, dorsal y lateral, guantes Force negros y medias blancas SFMTB.`}
                 sizes="(min-width: 1024px) 380px, (min-width: 768px) 55vw, 384px"
                 placeholder="blur"
                 className="h-auto w-full rounded-xs"

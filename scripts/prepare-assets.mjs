@@ -12,7 +12,7 @@ const photos = [
   { src: '_DSC1760.jpg', out: 'images/salida-edicion-anterior.webp', width: 1600, keep: 0.87 },
   { src: 'DSC_9084.jpg', out: 'images/escuela-ciclomontanismo.webp', width: 1600, keep: 0.87 },
   { src: 'FondoPiezas.jpeg', out: 'images/cascada-san-francisco.webp', width: 1000, keep: 1 },
-  { src: 'cambios/JerseyMedias.png', out: 'images/indumentaria-jersey-medias.webp', width: 1200, keep: 1 },
+  { src: 'cambios/Indumentaria.png', out: 'images/indumentaria-opcional.webp', width: 1200, keep: 1 },
 ];
 
 const logos = [
