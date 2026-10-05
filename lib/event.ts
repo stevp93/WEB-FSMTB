@@ -160,8 +160,68 @@ export const PRIZES = {
   note: 'De no completarse el mínimo de 30 inscritos por categoría, la premiación será en obsequios.',
 } as const;
 
-/** Marcas aliadas: se agregan aquí con su logo en public/logos/ a medida que se sumen. */
-export const ALLIES: { name: string; url?: string; logo: { src: string; width: number; height: number } }[] = [];
+/** Marcas aliadas: se agregan aquí con su Instagram y su logo en public/logos/aliados/ (`npm run assets`). */
+export const ALLIES: {
+  name: string;
+  handle: string;
+  url: string;
+  logo: { src: string; width: number; height: number };
+}[] = [
+  {
+    name: 'TesaRoll',
+    handle: '@tesarolls',
+    url: 'https://www.instagram.com/tesarolls/',
+    logo: { src: '/logos/aliados/tesaroll.png', width: 327, height: 240 },
+  },
+  {
+    name: 'La Abejita del Panal 8A',
+    handle: '@laabejitadelpanal.8a',
+    url: 'https://www.instagram.com/laabejitadelpanal.8a/',
+    logo: { src: '/logos/aliados/la-abejita-del-panal.png', width: 242, height: 240 },
+  },
+  {
+    name: 'Eat Coffee',
+    handle: '@eat_coffeeco',
+    url: 'https://www.instagram.com/eat_coffeeco/',
+    logo: { src: '/logos/aliados/eat-coffee.png', width: 436, height: 240 },
+  },
+  {
+    name: 'No Pinches',
+    handle: '@no_pinches_',
+    url: 'https://www.instagram.com/no_pinches_/',
+    logo: { src: '/logos/aliados/no-pinches.png', width: 210, height: 240 },
+  },
+  {
+    name: 'El Capo PH',
+    handle: '@elcapo.ph',
+    url: 'https://www.instagram.com/elcapo.ph/',
+    logo: { src: '/logos/aliados/elcapo-ph.png', width: 480, height: 102 },
+  },
+  {
+    name: 'InBiciBle',
+    handle: '@in_bici_ble',
+    url: 'https://www.instagram.com/in_bici_ble/',
+    logo: { src: '/logos/aliados/inbicible.png', width: 480, height: 137 },
+  },
+  {
+    name: 'Tibet Epic',
+    handle: '@tibetepic',
+    url: 'https://www.instagram.com/tibetepic/',
+    logo: { src: '/logos/aliados/tibet-epic.png', width: 373, height: 240 },
+  },
+  {
+    name: 'Eleven',
+    handle: '@elevenprooficial',
+    url: 'https://www.instagram.com/elevenprooficial/',
+    logo: { src: '/logos/aliados/eleven.png', width: 480, height: 236 },
+  },
+  {
+    name: 'Col du Coq',
+    handle: '@colducoq',
+    url: 'https://www.instagram.com/colducoq/',
+    logo: { src: '/logos/aliados/col-du-coq.png', width: 470, height: 240 },
+  },
+];
 
 export const ORGANIZERS = [
   {
