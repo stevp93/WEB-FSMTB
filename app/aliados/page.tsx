@@ -138,29 +138,33 @@ export default function AliadosPage() {
         <div className="frame mt-10">
           <h3 className="text-sm text-ink-muted">Marcas aliadas</h3>
           <ul className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {ALLIES.map((ally) => {
-              const logo = (
-                <Image
-                  src={withBase(ally.logo.src)}
-                  alt={ally.name}
-                  width={ally.logo.width}
-                  height={ally.logo.height}
-                  sizes="192px"
-                  className="max-h-16 w-auto object-contain"
-                />
-              );
-              return (
-                <li key={ally.name} className="flex h-28 items-center justify-center rounded-xs border border-line/20 p-4">
-                  {ally.url ? (
-                    <a href={ally.url} target="_blank" rel="noopener noreferrer" className="flex h-full items-center">
-                      {logo}
-                    </a>
-                  ) : (
-                    logo
-                  )}
-                </li>
-              );
-            })}
+            {ALLIES.map((ally) => (
+              <li key={ally.handle}>
+                <a
+                  href={ally.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${ally.name} en Instagram (${ally.handle})`}
+                  className="group flex h-full flex-col items-center justify-center gap-3 rounded-xs border border-line/20 p-4 text-center transition-colors duration-150 hover:border-accent"
+                >
+                  <span className="flex h-20 w-full items-center justify-center">
+                    <Image
+                      src={withBase(ally.logo.src)}
+                      alt=""
+                      width={ally.logo.width}
+                      height={ally.logo.height}
+                      sizes="192px"
+                      className="max-h-full w-auto max-w-full rounded-xs object-contain"
+                    />
+                  </span>
+                  <span className="font-display text-base font-semibold text-ink">{ally.name}</span>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors duration-150 group-hover:text-accent">
+                    <Instagram className="size-4 shrink-0 text-accent" aria-hidden />
+                    {ally.handle}
+                  </span>
+                </a>
+              </li>
+            ))}
             {Array.from({ length: Math.max(0, ALLY_SLOTS - ALLIES.length) }, (_, i) => (
               <li key={`libre-${i}`} className="flex h-28 items-center justify-center rounded-xs border border-dashed border-line/35 p-4 text-center text-sm text-ink-muted">
                 Espacio para tu marca

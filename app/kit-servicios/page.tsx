@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { FileDown } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { KitIcon } from '@/components/ui/KitIcon';
@@ -9,7 +8,6 @@ import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { withBase } from '@/lib/asset';
 import { EVENT, INCLUDES, PRIZES, ROUTES, formatCOP } from '@/lib/event';
-import indumentaria from '@/public/images/indumentaria-opcional.webp';
 
 const PODIUM_LABELS = ['Primero', 'Segundo', 'Tercero'];
 const podiumTotal = PRIZES.podium.reduce((sum, value) => sum + value, 0);
@@ -78,14 +76,21 @@ export default function KitServiciosPage() {
             <RegisterLink className={buttonClass('primary', 'lg', 'mt-8')}>Reservar mi cupo</RegisterLink>
           </div>
           <figure className="lg:col-span-6 lg:col-start-7">
-            <Image
-              src={indumentaria}
-              alt={`Indumentaria opcional por ${formatCOP(apparel.price)}: jersey Eleven color arena con cascada y huellas de llanta en vista frontal, dorsal y lateral, guantes Force negros y medias blancas SFMTB.`}
-              sizes="(min-width: 1024px) 569px, (min-width: 768px) 448px, 100vw"
-              placeholder="blur"
-              className="mx-auto h-auto w-full max-w-md rounded-xs"
+            <video
+              src={withBase('/video/jersey-sfmtb.mp4')}
+              poster={withBase('/video/jersey-sfmtb-poster.webp')}
+              width={720}
+              height={1280}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+              aria-label="Video del jersey Eleven de la SFMTB Trilogy Race: color arena con cascada y huellas de llanta, en vista frontal y dorsal."
+              className="mx-auto h-auto w-full max-w-sm rounded-xs"
             />
-            <figcaption className="mx-auto mt-3 max-w-md text-sm text-ink-muted">{apparel.items}.</figcaption>
+            <figcaption className="mx-auto mt-3 max-w-sm text-sm text-ink-muted">{apparel.items}.</figcaption>
           </figure>
         </div>
       </section>

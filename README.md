@@ -45,7 +45,7 @@ El crédito de SP Automatizaciones (pie de página y Aliados) enlaza a Instagram
 
 ## Marcas aliadas
 
-Se agregan en `ALLIES` (`lib/event.ts`) con su logo en `public/logos/`; mientras falten, Aliados muestra casillas "Espacio para tu marca".
+Se agregan en `ALLIES` (`lib/event.ts`) con su nombre, Instagram y logo; el original va en `IMAGES Y LOGOS/Aliados/` y `npm run assets` lo deja en `public/logos/aliados/`; mientras haya menos de tres, Aliados muestra casillas "Espacio para tu marca".
 
 ## 3D y póster
 
