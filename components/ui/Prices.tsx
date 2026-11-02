@@ -1,21 +1,23 @@
 import { EVENT, formatCOP } from '@/lib/event';
+import { GROUP_MESSAGE, whatsappLink } from '@/lib/whatsapp';
 import { cx } from './cx';
+import { inlineLinkClass } from './button';
 
-/** Los dos valores del evento, siempre juntos: inscripción e indumentaria opcional. */
+/** Único valor de venta (la inscripción) y el aviso de descuento para grupos. */
 export function Prices({ className, align = 'start' }: { className?: string; align?: 'start' | 'end' }) {
-  const { apparel } = EVENT;
   return (
-    <dl className={cx('flex flex-wrap gap-x-8 gap-y-3', align === 'end' && 'lg:justify-end', className)}>
-      <div className="flex flex-col-reverse">
+    <div className={cx('flex flex-col gap-2', align === 'end' && 'lg:items-end lg:text-right', className)}>
+      <dl className="flex flex-col-reverse">
         <dt className="text-sm text-ink-muted">Inscripción</dt>
         <dd className="tabular font-display text-2xl font-semibold text-ink">{formatCOP(EVENT.price)}</dd>
-      </div>
-      <div className="flex flex-col-reverse">
-        <dt className="text-sm text-ink-muted">
-          {apparel.label} <span className="sr-only">({apparel.items})</span>
-        </dt>
-        <dd className="tabular font-display text-2xl font-semibold text-ink">{formatCOP(apparel.price)}</dd>
-      </div>
-    </dl>
+      </dl>
+      <p className="max-w-measure-sm text-sm text-ink-muted">
+        ¿Grupo de más de {EVENT.groupDiscount.minPeople} personas? Tienen descuento:{' '}
+        <a href={whatsappLink(GROUP_MESSAGE)} target="_blank" rel="noopener noreferrer" className={inlineLinkClass}>
+          escríbenos por WhatsApp
+        </a>
+        .
+      </p>
+    </div>
   );
 }

@@ -19,7 +19,7 @@ Copia `.env.example` a `.env.local` y completa las variables.
 
 | Qué | Archivo |
 | --- | --- |
-| Datos maestros (fecha, precios, rutas, kit, premiación, organizadores, marcas aliadas, contacto) | `lib/event.ts` |
+| Datos maestros (fecha, precio único, descuento de grupos, entrega de kits, rutas, kit, premiación, organizadores, marcas aliadas, contacto) | `lib/event.ts` |
 | Tokens de color (primitivo → semántico → componente) | `lib/tokens.ts` → `tailwind.config.ts` |
 | Encuadre 3D por página | `lib/shots.ts` |
 | Terreno y trazados (compartidos por 3D y perfiles) | `lib/terrain.ts`, `lib/profiles.ts` |
@@ -45,7 +45,11 @@ El crédito de SP Automatizaciones (pie de página y Aliados) enlaza a Instagram
 
 ## Marcas aliadas
 
-Se agregan en `ALLIES` (`lib/event.ts`) con su nombre, Instagram y logo; el original va en `IMAGES Y LOGOS/Aliados/` y `npm run assets` lo deja en `public/logos/aliados/`; mientras haya menos de tres, Aliados muestra casillas "Espacio para tu marca".
+Se agregan en `ALLIES` (`lib/event.ts`) con su nombre, Instagram y logo; el original va en `IMAGES Y LOGOS/Aliados/` y `npm run assets` lo deja en `public/logos/aliados/`; mientras haya menos de tres, Aliados muestra casillas "Espacio para tu marca". Si una marca aún no tiene logo (se omite `logo`), la tarjeta muestra su nombre. Los logos que llegan en PDF se pasan antes a PNG (`pdftoppm -png -r 200 -singlefile`); `invert: true` convierte un logo oscuro sobre blanco en blanco sobre transparente.
+
+## Precio
+
+El único valor de venta es la inscripción (`EVENT.price`, $180.000). Ya no se vende indumentaria; el video del jersey queda en Kit y servicios solo como muestra. Grupos de más de 10 personas: el aviso lleva al WhatsApp del bot, que los pasa al organizador.
 
 ## 3D y póster
 

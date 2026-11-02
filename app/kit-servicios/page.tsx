@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
-import { FileDown } from 'lucide-react';
+import { Clock, FileDown, MapPin, UserCheck } from 'lucide-react';
 import { PageHeader } from '@/components/site/PageHeader';
 import { KitIcon } from '@/components/ui/KitIcon';
 import { Prices } from '@/components/ui/Prices';
@@ -8,7 +7,6 @@ import { RegisterLink } from '@/components/ui/RegisterLink';
 import { buttonClass, inlineLinkClass } from '@/components/ui/button';
 import { cx } from '@/components/ui/cx';
 import { withBase } from '@/lib/asset';
-import indumentaria from '@/public/images/indumentaria-opcional.webp';
 import { EVENT, INCLUDES, PRIZES, ROUTES, formatCOP } from '@/lib/event';
 
 const PODIUM_LABELS = ['Primero', 'Segundo', 'Tercero'];
@@ -16,16 +14,14 @@ const podiumTotal = PRIZES.podium.reduce((sum, value) => sum + value, 0);
 
 export const metadata: Metadata = {
   title: 'Kit, servicios y premiación',
-  description: `Inscripción de ${formatCOP(EVENT.price)} con número y chip, medalla Finishers, fotografía profesional, seguro de accidentes, avituallamiento y premiación. ${EVENT.apparel.label}: ${formatCOP(EVENT.apparel.price)}.`,
+  description: `Inscripción de ${formatCOP(EVENT.price)} con número y chip, medalla Finishers, fotografía profesional, seguro de accidentes, avituallamiento y premiación. Entrega de kits el sábado 28 de noviembre en Bogotá (Km 0) y en San Francisco.`,
   alternates: { canonical: '/kit-servicios' },
 };
 
 export default function KitServiciosPage() {
-  const { apparel } = EVENT;
-
   return (
     <>
-      <PageHeader title="Kit, servicios y premiación" lead="Todo lo que incluye tu inscripción y la indumentaria oficial de la edición.">
+      <PageHeader title="Kit, servicios y premiación" lead="Todo lo que incluye tu inscripción, dónde reclamar tu kit y la premiación.">
         <Prices className="mt-8" />
       </PageHeader>
 
@@ -63,45 +59,71 @@ export default function KitServiciosPage() {
         </div>
       </section>
 
-      <section aria-labelledby="indumentaria" className="border-t border-line/15 py-20 md:py-28">
+      <section aria-labelledby="entrega-kits" className="border-t border-line/15 py-20 md:py-28">
+        <div className="frame">
+          <h2 id="entrega-kits" className="font-display text-xl font-semibold text-ink md:text-2xl">
+            Entrega de kits
+          </h2>
+          <p className="mt-4 max-w-measure text-lg text-ink-muted">{EVENT.kitPickupProxy}</p>
+          <ul className="mt-8 grid gap-4 md:grid-cols-3">
+            {EVENT.kitPickup.map((spot) => (
+              <li key={spot.id} className="flex flex-col gap-3 rounded-xs bg-surface p-5 shadow-lift-2 md:p-6">
+                <h3 className="font-display text-lg font-semibold text-ink">{spot.title}</h3>
+                <p className="flex gap-2 text-ink">
+                  <Clock className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
+                  {spot.when}
+                </p>
+                <p className="flex gap-2 text-ink-muted">
+                  <MapPin className="mt-1 size-4 shrink-0 text-accent" aria-hidden />
+                  {spot.where}
+                </p>
+                {spot.note ? <p className="text-sm font-semibold text-accent">{spot.note}</p> : null}
+                {spot.mapUrl ? (
+                  <a
+                    href={spot.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${inlineLinkClass} mt-auto flex min-h-11 w-fit items-center gap-2`}
+                  >
+                    Ver ubicación en Google Maps
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 flex items-start gap-2 text-sm text-ink-muted">
+            <UserCheck className="size-4 shrink-0 text-accent" aria-hidden />
+            Lleva tu documento de identidad para reclamar el kit.
+          </p>
+        </div>
+      </section>
+
+      <section aria-labelledby="jersey" className="border-t border-line/15 py-20 md:py-28">
         <div className="frame grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-8">
           <div className="lg:col-span-5">
-            <p className="text-sm font-semibold text-accent">Se vende por separado</p>
-            <h2 id="indumentaria" className="mt-2 font-display text-xl font-semibold text-ink md:text-2xl">
-              {apparel.label}
+            <h2 id="jersey" className="font-display text-xl font-semibold text-ink md:text-2xl">
+              El jersey de la edición
             </h2>
-            <p className="tabular mt-4 font-display text-3xl font-semibold text-ink">{formatCOP(apparel.price)}</p>
             <p className="mt-5 max-w-measure-sm text-lg text-ink-muted">
-              Kit de indumentaria de la edición: Jersey Eleven con la cascada y las huellas de la montaña, guantes Force y
-              medias SFMTB. No está incluido en la inscripción.
+              Diseño Eleven con la cascada y las huellas de la montaña de San Francisco.
             </p>
             <RegisterLink className={buttonClass('primary', 'lg', 'mt-8')}>Reservar mi cupo</RegisterLink>
           </div>
-          <figure className="lg:col-span-7 lg:col-start-6">
-            <div className="mx-auto grid max-w-sm gap-4 md:max-w-none md:grid-cols-[3fr_4fr]">
-              <video
-                src={withBase('/video/jersey-sfmtb.mp4')}
-                poster={withBase('/video/jersey-sfmtb-poster.webp')}
-                width={720}
-                height={1280}
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-                preload="metadata"
-                aria-label="Video del jersey Eleven de la SFMTB Trilogy Race: color arena con cascada y huellas de llanta, en vista frontal y dorsal."
-                className="h-auto w-full rounded-xs"
-              />
-              <Image
-                src={indumentaria}
-                alt={`Indumentaria opcional por ${formatCOP(apparel.price)}: jersey Eleven color arena con cascada y huellas de llanta en vista frontal, dorsal y lateral, guantes Force negros y medias blancas SFMTB.`}
-                sizes="(min-width: 1024px) 380px, (min-width: 768px) 55vw, 384px"
-                placeholder="blur"
-                className="h-auto w-full rounded-xs"
-              />
-            </div>
-            <figcaption className="mx-auto mt-3 max-w-sm text-sm text-ink-muted md:max-w-none">{apparel.items}.</figcaption>
+          <figure className="lg:col-span-5 lg:col-start-7">
+            <video
+              src={withBase('/video/jersey-sfmtb.mp4')}
+              poster={withBase('/video/jersey-sfmtb-poster.webp')}
+              width={720}
+              height={1280}
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+              preload="metadata"
+              aria-label="Video del jersey Eleven de la SFMTB Trilogy Race: color arena con cascada y huellas de llanta, en vista frontal y dorsal."
+              className="mx-auto h-auto w-full max-w-sm rounded-xs"
+            />
           </figure>
         </div>
       </section>

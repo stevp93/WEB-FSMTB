@@ -148,14 +148,20 @@ export default function AliadosPage() {
                   className="group flex h-full flex-col items-center justify-center gap-3 rounded-xs border border-line/20 p-4 text-center transition-colors duration-150 hover:border-accent"
                 >
                   <span className="flex h-20 w-full items-center justify-center">
-                    <Image
-                      src={withBase(ally.logo.src)}
-                      alt=""
-                      width={ally.logo.width}
-                      height={ally.logo.height}
-                      sizes="192px"
-                      className="max-h-full w-auto max-w-full rounded-xs object-contain"
-                    />
+                    {ally.logo ? (
+                      <Image
+                        src={withBase(ally.logo.src)}
+                        alt=""
+                        width={ally.logo.width}
+                        height={ally.logo.height}
+                        sizes="192px"
+                        className="max-h-full w-auto max-w-full rounded-xs object-contain"
+                      />
+                    ) : (
+                      <span aria-hidden className="font-display text-2xl font-bold uppercase leading-tight text-ink">
+                        {ally.name}
+                      </span>
+                    )}
                   </span>
                   <span className="font-display text-base font-semibold text-ink">{ally.name}</span>
                   <span className="inline-flex items-center gap-1.5 text-sm text-ink-muted transition-colors duration-150 group-hover:text-accent">
