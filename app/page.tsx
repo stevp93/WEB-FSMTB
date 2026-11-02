@@ -20,7 +20,7 @@ const QUICK_LINKS = [
   {
     href: '/kit-servicios',
     title: 'Kit y servicios',
-    text: 'Qué incluye la inscripción, indumentaria opcional y premiación de cada categoría.',
+    text: 'Qué incluye la inscripción, entrega de kits y premiación de cada categoría.',
     icon: Backpack,
   },
   {
@@ -176,7 +176,7 @@ export default function HomePage() {
               Tu cupo en la tercera edición
             </h2>
             <p className="mt-4 max-w-measure-sm text-lg text-ink-muted">
-              Kit del corredor, seguro de accidentes, apoyo en ruta y premiación. La indumentaria se adquiere por separado.
+              Kit del corredor, seguro de accidentes, apoyo en ruta y premiación. Entrega de kits el sábado 28 de noviembre en Bogotá y San Francisco.
             </p>
             <Prices className="mt-6" />
           </div>

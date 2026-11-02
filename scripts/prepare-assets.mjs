@@ -12,7 +12,6 @@ const photos = [
   { src: '_DSC1760.jpg', out: 'images/salida-edicion-anterior.webp', width: 1600, keep: 0.87 },
   { src: 'DSC_9084.jpg', out: 'images/escuela-ciclomontanismo.webp', width: 1600, keep: 0.87 },
   { src: 'FondoPiezas.jpeg', out: 'images/cascada-san-francisco.webp', width: 1000, keep: 1 },
-  { src: 'cambios/Indumentaria.png', out: 'images/indumentaria-opcional.webp', width: 1200, keep: 1 },
 ];
 
 const logos = [
@@ -70,6 +69,17 @@ const allies = [
   { src: 'Aliados/TibetEpic.png', out: 'logos/aliados/tibet-epic.png' },
   { src: 'Aliados/Eleven.png', out: 'logos/aliados/eleven.png' },
   { src: 'Aliados/Colducoq.png', out: 'logos/aliados/col-du-coq.png' },
+  // Los PDF se rasterizan antes a PNG (pdftoppm -png -r 200 -singlefile).
+  { src: 'Aliados/HealthySports.png', out: 'logos/aliados/healthy-sports.png', invert: true },
+  { src: 'Aliados/SIO-blanco.png', out: 'logos/aliados/sio.png' },
+  { src: 'Aliados/Grupetta.jpg', out: 'logos/aliados/grupetta.png' },
+  { src: 'Aliados/Legado.jpeg', out: 'logos/aliados/legado-bike.png' },
+  { src: 'Aliados/Talpa.png', out: 'logos/aliados/talpa.png' },
+  { src: 'Aliados/Articon.png', out: 'logos/aliados/articon.png', plate: true },
+  { src: 'Aliados/SoyCiclismo.png', out: 'logos/aliados/soy-ciclismo.png', plate: true },
+  { src: 'Aliados/Yovi.png', out: 'logos/aliados/gelatina-yovi.png' },
+  { src: 'Aliados/Russi.png', out: 'logos/aliados/russi.png' },
+  { src: 'Aliados/Smak.png', out: 'logos/aliados/smak.png', plate: true },
 ];
 
 for (const a of allies) {
@@ -77,6 +87,21 @@ for (const a of allies) {
   const out = path.join(PUB, a.out);
   await ensureDir(out);
   let image = sharp(input);
+  if (a.invert) {
+    // invert: logo oscuro sobre fondo blanco → logo blanco sobre transparente.
+    const alpha = await sharp(input)
+      .flatten({ background: '#ffffff' })
+      .greyscale()
+      .negate()
+      .linear(1.35, 0)
+      .toColourspace('b-w')
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+    const { width, height } = alpha.info;
+    image = sharp({ create: { width, height, channels: 3, background: '#ffffff' } }).joinChannel(alpha.data, {
+      raw: { width, height, channels: 1 },
+    });
+  }
   if (a.knockout) {
     const alpha = await sharp(input).greyscale().toColourspace('b-w').raw().toBuffer({ resolveWithObject: true });
     const { width, height } = alpha.info;

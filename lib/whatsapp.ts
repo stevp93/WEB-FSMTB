@@ -7,3 +7,4 @@ export function whatsappLink(text: string) {
 
 export const GENERAL_MESSAGE = `Hola, quiero información sobre la ${EVENT.name} 2026.`;
 export const ALLY_MESSAGE = `Hola, quiero conocer las modalidades para ser aliado de la ${EVENT.name} 2026.`;
+export const GROUP_MESSAGE = `Hola, somos un grupo de más de ${EVENT.groupDiscount.minPeople} personas y queremos el descuento para la ${EVENT.name} 2026.`;

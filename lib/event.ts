@@ -16,17 +16,45 @@ export const EVENT = {
   shortDescription:
     'Algunos ya saben qué significa SFMTB, para otros, es el turno de conocerlo. Ven a competir en un territorio que tiene una identidad propia.',
   longDescription: 'Nuestra tercera edición es el crecimiento de una experiencia que evoluciona.',
+  // Único valor de venta: la inscripción. Ya no se vende indumentaria.
   price: 180000,
-  // Se vende por separado de la inscripción.
-  apparel: {
-    label: 'Indumentaria opcional',
-    price: 130000,
-    items: 'Jersey Eleven, guantes Force y medias',
+  // Descuento para grupos: se gestiona por WhatsApp con el bot, que los dirige al organizador.
+  groupDiscount: {
+    minPeople: 10,
+    text: 'Grupos de más de 10 personas tienen descuento: escríbenos por WhatsApp y te ponemos en contacto con el organizador.',
   },
   currency: 'COP',
   // Reglamento oficial en PDF (public/docs).
   rulesPdf: { src: '/docs/reglamento-sfmtb-2026.pdf', sizeLabel: '5,7 MB' },
   signature: 'SAN FRANCISCO MTB OFICIAL 2026',
+  // Entrega de kits. Si el corredor no puede asistir, puede autorizar a otra persona.
+  kitPickup: [
+    {
+      id: 'bogota',
+      title: 'Bogotá · Km 0',
+      when: 'Sábado 28 de noviembre, de 7:00 a. m. a 3:00 p. m., jornada continua',
+      where: 'Km 0, donde inicia el ascenso al Alto de Patios. Avenida Circunvalar # 84D-20',
+      mapUrl: 'https://maps.app.goo.gl/vs9XopbdTgZNeh4E6',
+      note: '',
+    },
+    {
+      id: 'san-francisco',
+      title: 'San Francisco, Cundinamarca',
+      when: 'Sábado 28 de noviembre, de 8:00 a. m. a 10:00 p. m.',
+      where: 'Se habilitará un espacio para la entrega de kits en el municipio.',
+      mapUrl: '',
+      note: '',
+    },
+    {
+      id: 'excepciones',
+      title: 'Solo excepciones, el día de la carrera',
+      when: 'Domingo 29 de noviembre, de 6:00 a 6:45 a. m.',
+      where: 'Punto de información del parque principal de San Francisco.',
+      mapUrl: '',
+      note: 'Solo para casos de fuerza mayor. Después de las 6:45 a. m. no habrá entrega.',
+    },
+  ],
+  kitPickupProxy: 'Si no puedes asistir, puedes autorizar a otra persona para que reclame tu kit.',
   contact: {
     website: 'https://www.sfmtb.info',
     websiteLabel: 'www.sfmtb.info',
@@ -160,12 +188,13 @@ export const PRIZES = {
   note: 'De no completarse el mínimo de 30 inscritos por categoría, la premiación será en obsequios.',
 } as const;
 
-/** Marcas aliadas: se agregan aquí con su Instagram y su logo en public/logos/aliados/ (`npm run assets`). */
+/** Marcas aliadas: se agregan aquí con su Instagram y su logo en public/logos/aliados/ (`npm run assets`).
+ * Sin `logo`, la tarjeta muestra el nombre de la marca. */
 export const ALLIES: {
   name: string;
   handle: string;
   url: string;
-  logo: { src: string; width: number; height: number };
+  logo?: { src: string; width: number; height: number };
 }[] = [
   {
     name: 'SP Automatizaciones',
@@ -226,6 +255,71 @@ export const ALLIES: {
     handle: '@colducoq',
     url: 'https://www.instagram.com/colducoq/',
     logo: { src: '/logos/aliados/col-du-coq.png', width: 470, height: 240 },
+  },
+  {
+    name: 'Healthy Sports',
+    handle: '@healthysportscolombia',
+    url: 'https://www.instagram.com/healthysportscolombia/',
+    logo: { src: '/logos/aliados/healthy-sports.png', width: 480, height: 203 },
+  },
+  {
+    name: 'SIO Bike',
+    handle: '@siobikecol',
+    url: 'https://www.instagram.com/siobikecol/',
+    logo: { src: '/logos/aliados/sio.png', width: 480, height: 110 },
+  },
+  {
+    name: 'Grupetta Store',
+    handle: '@grupetta_store',
+    url: 'https://www.instagram.com/grupetta_store/',
+    logo: { src: '/logos/aliados/grupetta.png', width: 480, height: 139 },
+  },
+  {
+    name: 'Km 0 Bogotá',
+    handle: '@km0.bogota',
+    url: 'https://www.instagram.com/km0.bogota/',
+  },
+  {
+    name: 'Legado Bike',
+    handle: '@legadobike.oficial',
+    url: 'https://www.instagram.com/legadobike.oficial/',
+    logo: { src: '/logos/aliados/legado-bike.png', width: 230, height: 80 },
+  },
+  {
+    name: 'Talpa Sports',
+    handle: '@talpa.sports',
+    url: 'https://www.instagram.com/talpa.sports/',
+    logo: { src: '/logos/aliados/talpa.png', width: 307, height: 240 },
+  },
+  {
+    name: 'Articon Publicidad',
+    handle: '@articonpublicidad',
+    url: 'https://www.instagram.com/articonpublicidad/',
+    logo: { src: '/logos/aliados/articon.png', width: 480, height: 213 },
+  },
+  {
+    name: 'Soy Ciclismo',
+    handle: '@soyciclismocolombia',
+    url: 'https://www.instagram.com/soyciclismocolombia/',
+    logo: { src: '/logos/aliados/soy-ciclismo.png', width: 480, height: 182 },
+  },
+  {
+    name: 'Gelatina Yovi',
+    handle: '@gelatinayovi',
+    url: 'https://www.instagram.com/gelatinayovi/',
+    logo: { src: '/logos/aliados/gelatina-yovi.png', width: 286, height: 240 },
+  },
+  {
+    name: 'Russi Bike Performance',
+    handle: '@russibikeperformance',
+    url: 'https://www.instagram.com/russibikeperformance/',
+    logo: { src: '/logos/aliados/russi.png', width: 480, height: 209 },
+  },
+  {
+    name: 'Smak',
+    handle: '@smakcol',
+    url: 'https://www.instagram.com/smakcol/',
+    logo: { src: '/logos/aliados/smak.png', width: 170, height: 240 },
   },
 ];
 
