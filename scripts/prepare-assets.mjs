@@ -80,6 +80,7 @@ const allies = [
   { src: 'Aliados/Yovi.png', out: 'logos/aliados/gelatina-yovi.png' },
   { src: 'Aliados/Russi.png', out: 'logos/aliados/russi.png' },
   { src: 'Aliados/Smak.png', out: 'logos/aliados/smak.png', plate: true },
+  { src: 'Aliados/Km0.webp', out: 'logos/aliados/km0.png' },
 ];
 
 for (const a of allies) {
