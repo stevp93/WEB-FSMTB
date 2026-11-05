@@ -40,8 +40,8 @@ export const EVENT = {
     {
       id: 'san-francisco',
       title: 'San Francisco, Cundinamarca',
-      when: 'Sábado 28 de noviembre, de 8:00 a. m. a 10:00 p. m.',
-      where: 'Se habilitará un espacio para la entrega de kits en el municipio.',
+      when: 'Sábado 28 de noviembre, de 8:00 p. m. a 10:00 p. m.',
+      where: 'Para quienes llegan desde el día anterior: se habilitará un espacio para la entrega de kits en el municipio.',
       mapUrl: '',
       note: '',
     },
@@ -278,6 +278,7 @@ export const ALLIES: {
     name: 'Km 0 Bogotá',
     handle: '@km0.bogota',
     url: 'https://www.instagram.com/km0.bogota/',
+    logo: { src: '/logos/aliados/km0.png', width: 480, height: 174 },
   },
   {
     name: 'Legado Bike',
